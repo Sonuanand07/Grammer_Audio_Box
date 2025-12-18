@@ -1,0 +1,116 @@
+# ⚡ KAGGLE UPLOAD & RUN - QUICK REFERENCE
+
+## 🚀 3 EASIEST STEPS
+
+### Step 1: Go to Kaggle (1 min)
+```
+1. Go to: https://www.kaggle.com/code
+2. Click: "Create" → "New Notebook"
+3. Name: "Grammar Scoring Engine"
+4. Create
+```
+
+### Step 2: Copy-Paste Code (5 min)
+
+**Cell 1:**
+```python
+!git clone https://github.com/Sonuanand07/Grammer_Audio_Box.git
+%cd Grammer_Audio_Box
+```
+Press Enter
+
+**Cell 2:**
+```python
+!pip install -q -r requirements.txt
+```
+Press Enter (wait 2-3 minutes)
+
+**Cell 3:**
+```python
+import os, sys, json, numpy as np, pandas as pd
+from src.audio_processor import AudioProcessor
+from src.text_processor import TextProcessor
+from src.grammar_scorer import GrammarScorer
+from src.utils import save_results, print_results_summary
+print("✅ All ready!")
+```
+Press Enter
+
+**Cell 4:**
+```python
+# Process sample audio
+audio_file = 'data/sample_audio.wav'
+audio_processor = AudioProcessor()
+text_processor = TextProcessor()
+grammar_scorer = GrammarScorer()
+
+audio, sr = audio_processor.preprocess_audio(audio_file)
+transcript = text_processor.speech_to_text(audio_file)
+text_data = text_processor.preprocess_text(transcript)
+
+result = grammar_scorer.score_grammar(
+    transcript,
+    audio_processor.get_duration(audio, sr),
+    audio_processor.get_pause_count(audio, sr),
+    text_data['pos_tags']
+)
+
+print(f"✅ Grammar Score: {result['final_score']}/100")
+print(f"Components: {result['components']}")
+```
+Press Enter (wait 3-4 minutes)
+
+### Step 3: Submit (2 min)
+```
+1. Click: "Share" (top right)
+2. Select: "Everyone" (Public)
+3. Click: "Update"
+4. Done! Your notebook is now public!
+```
+
+---
+
+## 📊 WHAT YOU'LL GET
+
+Output:
+```
+✅ Grammar Score: 85.5/100
+
+Components:
+  Grammar: 90.2/100
+  Fluency: 82.3/100
+  Clarity: 88.1/100
+  Complexity: 78.5/100
+
+Statistics:
+  Words: 45
+  Sentences: 3
+```
+
+---
+
+## 🔗 LINKS
+
+**Your Repository:**
+```
+https://github.com/Sonuanand07/Grammer_Audio_Box
+```
+
+**After Submission (Kaggle notebook link):**
+```
+Copy from: https://www.kaggle.com/code/[your-username]/[notebook-name]
+```
+
+---
+
+## ⏱️ TOTAL TIME: 10 MINUTES
+
+- Clone: 1 min
+- Install: 3 min
+- Import: 1 min
+- Run: 3 min
+- Submit: 2 min
+
+---
+
+**That's it! You're live on Kaggle!** 🎉
